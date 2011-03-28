@@ -1,0 +1,30 @@
+[Desktop Entry]
+Type=ControlPanelApplet
+Name=Web Accounts
+Name[zh_TW]=網路帳戶
+Name[zh_CN]=Web 帐户
+Name[tr]=Web Hesapları
+Name[sv]=Webbkonton
+Name[ru]=Учетные веб-записи
+Name[pt_PT]=Contas Web
+Name[pt_BR]=Contas da Web
+Name[pl]=Konta sieci Web
+Name[no]=Webkontoer
+Name[nl]=Webaccounts
+Name[ko]=웹 계정
+Name[ja]=Webアカウント
+Name[it]=Account Web
+Name[hu]=Webes fiókok
+Name[fr]=Comptes Web
+Name[fi]=Verkkotilit
+Name[es]=Cuentas web
+Name[en_US]=Web Accounts
+Name[en_UK]=Web Accounts
+Name[el]=Λογαριασμοί web
+Name[de]=Webkonto
+Name[da]=Webkonti
+Name[cs]=Webové účty
+Icon=web
+
+[MTS]
+Part=/usr/share/meego-ux-settings/Socialweb/Socialweb.qml
