@@ -116,15 +116,15 @@ ApplicationPage {
                     Rectangle {
                         id: serviceRect
                         anchors.left: serviceIcon.right
-                        anchors.top: parent.top
-                        anchors.verticalCenter: parent.verticalCenter
-                        height: childrenRect.height
+                        anchors.verticalCenter: serviceIcon.verticalCenter
+                        height: (loggedInName.visible ?
+                                 accountTypeName.height + loggedInName.height + 10: accountTypeName.height)
 
                         Text {
                             id: accountTypeName
                             anchors.left: parent.left
                             anchors.top: parent.top
-                            anchors.margins: 10
+                            anchors.leftMargin: 10
                             text: swService.getDisplayName()
                             elide: Text.ElideRight
                             font.pixelSize: theme_fontPixelSizeLarge
@@ -135,7 +135,8 @@ ApplicationPage {
                             id: loggedInName
                             anchors.left: parent.left
                             anchors.top: accountTypeName.bottom
-                            anchors.margins: 10
+                            anchors.topMargin: 10
+                            anchors.leftMargin: 10
                             text: swServiceConfig.getParamValue(Const.nameParam)
                             elide: Text.ElideRight
                             font.pixelSize: theme_fontPixelSizeNormal
