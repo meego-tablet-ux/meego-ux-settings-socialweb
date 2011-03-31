@@ -93,13 +93,18 @@ ApplicationPage {
                     //detailsComponent: undefined
 
                     Image {
+                        id: sizeImage
+                        visible: false
+                        source: Const.iconPath + Const.iconPathGeneric;
+                        smooth: true
+                    }
+
+                    Image {
                         id: serviceIcon
                         anchors.top: parent.top
                         anchors.left: parent.left
-                        anchors.margins: 10
+                        anchors.leftMargin: 10
                         asynchronous: true
-                        width: 50
-                        height: 50
                         source: (swService.configured && swService.hasRequestAvatar() ?
                                  swService.getUserAvatarPath() :
                                  Const.iconPath + swService.getServiceName())
@@ -111,11 +116,17 @@ ApplicationPage {
                                 serviceIcon.source = Const.iconPath + Const.iconPathGeneric;
                             }
                         }
+
+                        Component.onCompleted: {
+                            serviceIcon.width = sizeImage.width
+                            serviceIcon.height = sizeImage.height
+                        }
                     }
 
                     Rectangle {
                         id: serviceRect
                         anchors.left: serviceIcon.right
+                        anchors.leftMargin: 10
                         anchors.verticalCenter: serviceIcon.verticalCenter
                         height: accountTypeName.height
 
@@ -137,7 +148,6 @@ ApplicationPage {
                                 }
                             }
                         }
-
 
                         Text {
                             id: accountTypeName
