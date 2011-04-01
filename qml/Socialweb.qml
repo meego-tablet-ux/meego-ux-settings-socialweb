@@ -117,8 +117,27 @@ ApplicationPage {
                         id: serviceRect
                         anchors.left: serviceIcon.right
                         anchors.verticalCenter: serviceIcon.verticalCenter
-                        height: (loggedInName.visible ?
-                                 accountTypeName.height + loggedInName.height + 10: accountTypeName.height)
+                        height: accountTypeName.height
+
+                        states: State {
+                            name: "multiline"
+
+                            PropertyChanges {
+                                target: serviceRect
+                                height: accountTypeName.height + loggedInName.height + 10
+                            }
+                            when: { loggedInName.visible }
+                        }
+                        transitions: Transition {
+                            SequentialAnimation {
+                                NumberAnimation {
+                                    properties: "height"
+                                    duration: 200
+                                    easing.type: Easing.InCubic
+                                }
+                            }
+                        }
+
 
                         Text {
                             id: accountTypeName
