@@ -57,6 +57,13 @@ ApplicationPage {
 //            console.log("new CH: " + compHeights);
 //        }
 
+        Image {
+            id: sizeImage
+            visible: false
+            source: Const.iconPath + Const.iconPathGeneric;
+            smooth: true
+        }
+
         ListView {
             id: serviceBoxes
             //anchors.fill: parent
@@ -93,18 +100,13 @@ ApplicationPage {
                     //detailsComponent: undefined
 
                     Image {
-                        id: sizeImage
-                        visible: false
-                        source: Const.iconPath + Const.iconPathGeneric;
-                        smooth: true
-                    }
-
-                    Image {
                         id: serviceIcon
                         anchors.top: parent.top
                         anchors.left: parent.left
                         anchors.leftMargin: 10
                         asynchronous: true
+                        width: sizeImage.width
+                        height: sizeImage.height
                         source: (swService.configured && swService.hasRequestAvatar() ?
                                  swService.getUserAvatarPath() :
                                  Const.iconPath + swService.getServiceName())
@@ -115,11 +117,6 @@ ApplicationPage {
                                 // Use fallback image
                                 serviceIcon.source = Const.iconPath + Const.iconPathGeneric;
                             }
-                        }
-
-                        Component.onCompleted: {
-                            serviceIcon.width = sizeImage.width
-                            serviceIcon.height = sizeImage.height
                         }
                     }
 
