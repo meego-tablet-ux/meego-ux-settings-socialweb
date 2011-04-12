@@ -116,15 +116,34 @@ ApplicationPage {
                     Rectangle {
                         id: serviceRect
                         anchors.left: serviceIcon.right
-                        anchors.top: parent.top
-                        anchors.verticalCenter: parent.verticalCenter
-                        height: childrenRect.height
+                        anchors.verticalCenter: serviceIcon.verticalCenter
+                        height: accountTypeName.height
+
+                        states: State {
+                            name: "multiline"
+
+                            PropertyChanges {
+                                target: serviceRect
+                                height: accountTypeName.height + loggedInName.height + 10
+                            }
+                            when: { loggedInName.visible }
+                        }
+                        transitions: Transition {
+                            SequentialAnimation {
+                                NumberAnimation {
+                                    properties: "height"
+                                    duration: 200
+                                    easing.type: Easing.InCubic
+                                }
+                            }
+                        }
+
 
                         Text {
                             id: accountTypeName
                             anchors.left: parent.left
                             anchors.top: parent.top
-                            anchors.margins: 10
+                            anchors.leftMargin: 10
                             text: swService.getDisplayName()
                             elide: Text.ElideRight
                             font.pixelSize: theme_fontPixelSizeLarge
@@ -135,7 +154,8 @@ ApplicationPage {
                             id: loggedInName
                             anchors.left: parent.left
                             anchors.top: accountTypeName.bottom
-                            anchors.margins: 10
+                            anchors.topMargin: 10
+                            anchors.leftMargin: 10
                             text: swServiceConfig.getParamValue(Const.nameParam)
                             elide: Text.ElideRight
                             font.pixelSize: theme_fontPixelSizeNormal
