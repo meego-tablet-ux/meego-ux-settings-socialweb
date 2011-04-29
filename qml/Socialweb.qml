@@ -7,13 +7,14 @@
  */
 
 import Qt 4.7
-import MeeGo.Labs.Components 0.1
+import MeeGo.Labs.Components 0.1 as Labs
+import MeeGo.Components 0.1
 import MeeGo.Settings 0.1
 import Socialweb 0.1
 import QtWebKit 1.0
 import "constants.js" as Const
 
-ApplicationPage {
+Labs.ApplicationPage {
     id: container
     title: Const.titleText
     anchors.fill: parent
@@ -89,7 +90,7 @@ ApplicationPage {
                     service: swService
                 }
 
-                ExpandingBox {
+                Labs.ExpandingBox {
                     id: serviceBox
                     expanded: false
                     //expandedHeight: 380
@@ -273,13 +274,13 @@ ApplicationPage {
                             case SwClientService.CredsInvalid:
                                 {
                                 textStatus.text = Const.cantSignInText;
-                                btnApply.title = Const.signInText;
+                                btnApply.text = Const.signInText;
                                 }
                                 break;
                             case SwClientService.CredsValid:
                                 {
                                 textStatus.text = Const.signedInText;
-                                btnApply.title = Const.signOutText;
+                                btnApply.text = Const.signOutText;
                                 }
                                 break;
                             }
@@ -360,16 +361,16 @@ ApplicationPage {
                             anchors.left: parent.left
                             height: Const.buttonHeight
                             width: Const.buttonWidth
-                            title: Const.signInText
+                            text: Const.signInText
 
                             onClicked: {
-                                if (title == Const.signInText) {
-                                    btnApply.title = Const.signOutText;
+                                if (text == Const.signInText) {
+                                    btnApply.text = Const.signOutText;
                                     swServiceConfig.setParamValue(Const.nameParam, edtUName.text);
                                     swServiceConfig.setParamValue(Const.passwordParam, edtPassword.text);
                                     swServiceConfig.saveConfigParams();
                                 } else {
-                                    btnApply.title = Const.signInText;
+                                    btnApply.text = Const.signInText;
                                     edtUName.text = "";
                                     swServiceConfig.setParamValue(Const.nameParam, "");
                                     edtPassword.text = "";
@@ -399,20 +400,20 @@ ApplicationPage {
 
                             switch (creds) {
                                 case SwClientService.CredsValid: {
-                                    btnApply.title = Const.signOutText
+                                    btnApply.text = Const.signOutText
                                     textDescription.text = Const.usernameText +
                                         swServiceConfig.getParamValue(Const.nameParam);
                                     }
                                     break;
                                 case SwClientService.CredsInvalid: {
-                                    btnApply.title = Const.signInText
+                                    btnApply.text = Const.signInText
                                     textDescription.text = swServiceConfig.getDescription() +
                                         Const.linkText.arg(swServiceConfig.getLink())
                                         .arg(Const.moreDetailsText);
                                     }
                                     break;
                                 case SwClientService.CredsUnknown: {
-                                    btnApply.title = Const.signInText
+                                    btnApply.text = Const.signInText
                                     textDescription.text = swServiceConfig.getDescription() +
                                         Const.linkText.arg(swServiceConfig.getLink())
                                         .arg(Const.moreDetailsText);
@@ -465,7 +466,7 @@ ApplicationPage {
                             anchors.horizontalCenter: parent.horizontalCenter
                             height: Const.buttonHeight
                             width: Const.buttonWidth
-                            title: Const.signInText
+                            text: Const.signInText
 
                             onClicked: {
                                 spinner.visible = true;
@@ -478,20 +479,19 @@ ApplicationPage {
                                     return;
                                 }
 
-                                if (title == Const.signInText) {
+                                if (text == Const.signInText) {
                                     var loginUrl = swServiceConfig.flickrOpenLoginUrl();
                                     if (loginUrl) {
-                                        scene.showModalDialog(webAuthDialogComponent)
-                                        dialogLoader.item.parent = scene.container;
-                                        dialogLoader.item.url = loginUrl;
-                                        btnApply.title = Const.continueText
+                                        webAuthDialog.show();
+                                        webAuthDialog.url = loginUrl;
+                                        btnApply.text = Const.continueText
                                     } else {
                                         textStatus.text = Const.cantSignInText;
                                     }
-                                } else if (title == Const.continueText) {
+                                } else if (text == Const.continueText) {
                                     if (!swServiceConfig.flickrContinueLogin()) {
                                         textStatus.text = Const.cantSignInText;
-                                        btnApply.title = Const.signInText;
+                                        btnApply.text = Const.signInText;
                                     }
                                     else {
                                         textStatus.text = "";
@@ -505,7 +505,7 @@ ApplicationPage {
                                 spinner.spinning = false;
                             }
 
-                            Spinner {
+                            Labs.Spinner {
                                 id: spinner
                                 z: 100
 
@@ -538,20 +538,20 @@ ApplicationPage {
 
                             switch (creds) {
                                 case SwClientService.CredsValid: {
-                                    btnApply.title = Const.signOutText
+                                    btnApply.text = Const.signOutText
                                     textDescription.text = Const.usernameText +
                                         swServiceConfig.getParamValue(Const.nameParam);
                                     }
                                     break;
                                 case SwClientService.CredsInvalid: {
-                                    btnApply.title = Const.signInText
+                                    btnApply.text = Const.signInText
                                     textDescription.text = swServiceConfig.getDescription() +
                                         Const.linkText.arg(swServiceConfig.getLink())
                                         .arg(Const.moreDetailsText);
                                     }
                                     break;
                                 case SwClientService.CredsUnknown: {
-                                    btnApply.title = Const.signInText
+                                    btnApply.text = Const.signInText
                                     textDescription.text = swServiceConfig.getDescription() +
                                         Const.linkText.arg(swServiceConfig.getLink())
                                         .arg(Const.moreDetailsText);
@@ -597,7 +597,7 @@ ApplicationPage {
                             anchors.horizontalCenter: parent.horizontalCenter
                             height: Const.buttonHeight
                             width: Const.buttonWidth
-                            title: Const.signInText
+                            text: Const.signInText
                             onClicked: {
                                 spinner.visible = true;
                                 spinner.spinning = true;
@@ -609,13 +609,12 @@ ApplicationPage {
                                     return;
                                 }
 
-                                if (title == Const.signInText) {
+                                if (text == Const.signInText) {
                                     var loginUrl = swServiceConfig.facebookOpenLogin();
                                     if (loginUrl) {
-                                        scene.showModalDialog(webAuthDialogComponent)
-                                        dialogLoader.item.parent = scene.container;
-                                        dialogLoader.item.url = loginUrl;
-                                        dialogLoader.item.testurl = "http://www.facebook.com/connect/login_success.html";
+                                        webAuthDialog.show()
+                                        webAuthDialog.url = loginUrl;
+                                        webAuthDialog.testurl = "http://www.facebook.com/connect/login_success.html";
                                     } else {
                                         textStatus.text = Const.cantSignInText;
                                     }
@@ -631,7 +630,7 @@ ApplicationPage {
 
                             Connections {
                                 ignoreUnknownSignals: true
-                                target: dialogLoader.item
+                                target: webAuthDialog
                                 onLoggedIn: {
                                     spinner.visible = true;
                                     spinner.spinning = true;
@@ -641,7 +640,7 @@ ApplicationPage {
                                 }
                             }
 
-                            Spinner {
+                            Labs.Spinner {
                                 id: spinner
                                 z: 100
 
@@ -683,20 +682,20 @@ ApplicationPage {
 
                             switch (creds) {
                                 case SwClientService.CredsValid: {
-                                    btnApply.title = Const.signOutText
+                                    btnApply.text = Const.signOutText
                                     textDescription.text = Const.usernameText +
                                         swServiceConfig.getParamValue(Const.nameParam);
                                     }
                                     break;
                                 case SwClientService.CredsInvalid: {
-                                    btnApply.title = Const.signInText
+                                    btnApply.text = Const.signInText
                                     textDescription.text = swServiceConfig.getDescription() +
                                         Const.linkText.arg(swServiceConfig.getLink())
                                         .arg(Const.moreDetailsText);
                                     }
                                     break;
                                 case SwClientService.CredsUnknown: {
-                                    btnApply.title = Const.signInText
+                                    btnApply.text = Const.signInText
                                     textDescription.text = swServiceConfig.getDescription() +
                                         Const.linkText.arg(swServiceConfig.getLink())
                                         .arg(Const.moreDetailsText);
@@ -754,7 +753,7 @@ ApplicationPage {
                             anchors.horizontalCenter: parent.horizontalCenter
                             height: Const.buttonHeight
                             width: Const.buttonWidth
-                            title: Const.signInText
+                            text: Const.signInText
                             onClicked: {
                                 spinner.visible = true;
                                 spinner.spinning = true;
@@ -766,26 +765,25 @@ ApplicationPage {
                                     return;
                                 }
 
-                                if (title == Const.signInText) {
+                                if (text == Const.signInText) {
                                     var loginUrl = swServiceConfig.oauthOpenLogin();
                                     if (loginUrl) {
-                                        scene.showModalDialog(webAuthDialogComponent)
-                                        dialogLoader.item.parent = scene.container;
-                                        dialogLoader.item.url = loginUrl;
+                                        webAuthDialog.show()
+                                        webAuthDialog.url = loginUrl;
                                         console.log("opening auth site " + loginUrl);
-                                        btnApply.title = Const.continueText;
+                                        btnApply.text = Const.continueText;
                                         edtVerifier.visible = swServiceConfig.oauthNeedsVerifier();
                                     }
                                     else {
                                         textStatus.text = Const.cantSignInText;
                                     }
-                                } else if (title == Const.continueText) {
+                                } else if (text == Const.continueText) {
                                     if (edtVerifier.visible) {
                                         swServiceConfig.oauthSetVerifier(edtVerifier.text);
                                     }
                                     if (!swServiceConfig.oauthContinueLogin()) {
                                         textStatus.text = Const.cantSignInText;
-                                        btnApply.title = Const.signInText;
+                                        btnApply.text = Const.signInText;
                                     }
                                     else {
                                         textStatus.text = "";
@@ -800,7 +798,7 @@ ApplicationPage {
                                 spinner.spinning = false;
                             }
 
-                            Spinner {
+                            Labs.Spinner {
                                 id: spinner
                                 z: 100
 
@@ -829,77 +827,78 @@ ApplicationPage {
             }
         }
 
-        Component {
-            id: webAuthDialogComponent
-            ModalDialog {
-                id: webAuthDialog
-                property string url
-                property string testurl
-                signal loggedIn(string url)
+        ModalDialog {
+            id: webAuthDialog
+            property string url
+            property string testurl
+            signal loggedIn(string url)
 
-                rightButtonText: Const.dialogButtonText
-                dialogTitle: Const.dialogTitleText
-                dialogWidth: container.width - 80
-                dialogHeight: container.height - 80
-                z: 500
+            acceptButtonText: Const.dialogButtonText
+            showAcceptButton: true
+            showCancelButton: false
+            title: Const.dialogTitleText
+            width: container.width - 80
+            height: container.height - 80
+//            dialogWidth: container.width - 80
+//            dialogHeight: container.height - 80
+            z: 500
 
-                onDialogClicked: {
-                    dialogLoader.sourceComponent = undefined;
-                }
+//            onAccepted: {
+//                dialogLoader.sourceComponent = undefined;
+//            }
 
-                contentLoader.sourceComponent: Flickable {
-                    id: flickable
-                    anchors.left: parent.left
-                    anchors.right: parent.right
-                    anchors.top: parent.top
-                    anchors.margins: 10
-                    anchors.bottom: parent.bottom
-                    contentWidth: Math.max(parent.width, webAuthWebView.width)
-                    contentHeight: Math.max(parent.height, webAuthWebView.height)
-                    clip: true
-                    boundsBehavior: Flickable.StopAtBounds
+            content: Flickable {
+                id: flickable
+                anchors.left: parent.left
+//                anchors.right: parent.right
+                anchors.top: parent.top
+                anchors.margins: 10
+//                anchors.bottom: parent.bottom
+                contentWidth: Math.max(parent.width, webAuthWebView.width)
+                contentHeight: Math.max(parent.height, webAuthWebView.height)
+                clip: true
+                boundsBehavior: Flickable.StopAtBounds
 
-                    WebView {
-                        id: webAuthWebView
-                        url: webAuthDialog.url
-                        //anchors.fill: parent
-                        preferredWidth: parent.width
-                        preferredHeight: parent.height
+                WebView {
+                    id: webAuthWebView
+                    url: webAuthDialog.url
+                    //anchors.fill: parent
+                    preferredWidth: parent.width
+                    preferredHeight: parent.height
 
-                        onLoadFinished: {
-                            spinner.visible = false;
-                            spinner.spinning = false;
-                            if (webAuthDialog.testurl &&
-                                url.toString().indexOf(webAuthDialog.testurl) == 0) {
-                                webAuthDialog.visible = false;
-                                loggedIn(url.toString());
-                                dialogLoader.sourceComponent = undefined;
-                            }
+                    onLoadFinished: {
+                        spinner.visible = false;
+                        spinner.spinning = false;
+                        if (webAuthDialog.testurl &&
+                            url.toString().indexOf(webAuthDialog.testurl) == 0) {
+                            webAuthDialog.visible = false;
+                            loggedIn(url.toString());
+                            dialogLoader.sourceComponent = undefined;
                         }
-
-                        onLoadStarted: {
-                            spinner.visible = true;
-                            spinner.spinning = true;
-                        }
-
-                        Spinner {
-                            id: spinner
-                            z: 600
-
-                            visible: false
-                            spinning: false
-
-                            onSpinningChanged: {
-                                if (!spinning)
-                                    spinning = true
-                            }
-                        }
-
                     }
+
+                    onLoadStarted: {
+                        spinner.visible = true;
+                        spinner.spinning = true;
+                    }
+
+                    Labs.Spinner {
+                        id: spinner
+                        z: 600
+
+                        visible: false
+                        spinning: false
+
+                        onSpinningChanged: {
+                            if (!spinning)
+                                spinning = true
+                        }
+                    }
+
                 }
             }
-        }
-    }   //contentArea
+        } //ModalDialog
+    }
 
 }
 
