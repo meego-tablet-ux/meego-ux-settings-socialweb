@@ -850,12 +850,14 @@ Labs.ApplicationPage {
             content: Flickable {
                 id: flickable
                 anchors.left: parent.left
-//                anchors.right: parent.right
+                //anchors.right: parent.right
                 anchors.top: parent.top
                 anchors.margins: 10
-//                anchors.bottom: parent.bottom
-                contentWidth: Math.max(parent.width, webAuthWebView.width)
-                contentHeight: Math.max(parent.height, webAuthWebView.height)
+                //anchors.bottom: parent.bottom
+                width: webAuthDialog.width - 20
+                height: webAuthDialog.height - 20
+                contentWidth: Math.max(width, webAuthWebView.width)
+                contentHeight: Math.max(height, webAuthWebView.height)
                 clip: true
                 boundsBehavior: Flickable.StopAtBounds
 
@@ -871,9 +873,8 @@ Labs.ApplicationPage {
                         spinner.spinning = false;
                         if (webAuthDialog.testurl &&
                             url.toString().indexOf(webAuthDialog.testurl) == 0) {
-                            webAuthDialog.visible = false;
-                            loggedIn(url.toString());
-                            dialogLoader.sourceComponent = undefined;
+                            webAuthDialog.hide();// = false;
+                            webAuthDialog.loggedIn(url.toString());
                         }
                     }
 
