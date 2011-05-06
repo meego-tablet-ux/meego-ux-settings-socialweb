@@ -99,7 +99,7 @@ Labs.ApplicationPage {
                     anchors.right:  parent.right
                     anchors.rightMargin: 2
                     //detailsComponent: undefined
-                    height: (sizeImage.height ? sizeImage.height : 75)
+                    height: sizeImage.height // (sizeImage.height ? sizeImage.height : 75)
 
                     Image {
                         id: serviceIcon
