@@ -90,7 +90,7 @@ Labs.ApplicationPage {
                     service: swService
                 }
 
-                Labs.ExpandingBox {
+                ExpandingBox {
                     id: serviceBox
                     expanded: false
                     //expandedHeight: 380
@@ -99,6 +99,7 @@ Labs.ApplicationPage {
                     anchors.right:  parent.right
                     anchors.rightMargin: 2
                     //detailsComponent: undefined
+                    height: (sizeImage.height ? sizeImage.height : 75)
 
                     Image {
                         id: serviceIcon
@@ -505,7 +506,7 @@ Labs.ApplicationPage {
                                 spinner.spinning = false;
                             }
 
-                            Labs.Spinner {
+                            Spinner {
                                 id: spinner
                                 z: 100
 
@@ -640,7 +641,7 @@ Labs.ApplicationPage {
                                 }
                             }
 
-                            Labs.Spinner {
+                            Spinner {
                                 id: spinner
                                 z: 100
 
@@ -798,7 +799,7 @@ Labs.ApplicationPage {
                                 spinner.spinning = false;
                             }
 
-                            Labs.Spinner {
+                            Spinner {
                                 id: spinner
                                 z: 100
 
@@ -883,7 +884,7 @@ Labs.ApplicationPage {
                         spinner.spinning = true;
                     }
 
-                    Labs.Spinner {
+                    Spinner {
                         id: spinner
                         z: 600
 
