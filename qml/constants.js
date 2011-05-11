@@ -22,7 +22,7 @@ var signingInText = qsTr("Attempting to sign in...");
 var signedInText = qsTr("Successfully signed in!");
 var signedOutText = qsTr("You have successfully signed out.  Content from this service will no longer appear on this device");
 
-var iconPath = "image://meegotheme/icons/services/";
+var iconPath = "image://themedimage/icons/services/";
 var iconPathGeneric = "generic";
 var nameParam = "user";
 var passwordParam = "password";

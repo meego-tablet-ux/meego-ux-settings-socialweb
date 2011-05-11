@@ -7,16 +7,15 @@
  */
 
 import Qt 4.7
-import MeeGo.Labs.Components 0.1 as Labs
 import MeeGo.Components 0.1
 import MeeGo.Settings 0.1
 import Socialweb 0.1
 import QtWebKit 1.0
 import "constants.js" as Const
 
-Labs.ApplicationPage {
+AppPage {
     id: container
-    title: Const.titleText
+    pageTitle: Const.titleText
     anchors.fill: parent
 
     SwClient {
@@ -28,7 +27,7 @@ Labs.ApplicationPage {
     }
 
     Component.onCompleted: {
-        console.log("Services: " + swClient.getServices());
+        console.debug("Services: " + swClient.getServices());
     }
 
 
@@ -36,27 +35,6 @@ Labs.ApplicationPage {
         id: contentArea
         parent: container.content
         anchors.fill: parent
-
-//        property variant compHeights: []
-
-//        function setCompHeight(name, hgt) {
-//            var x;
-//            console.log("Looking for service " + name + " in CH");
-//            for (x in contentArea.compHeights) {
-//                //Force it to be a number w/ the multiply
-//                var plus1 = (x*1) + 1;
-//                //For some reason, can't get the array to just replace the value,
-//                //so we splice the values out, then add them back in...
-//                if (compHeights[x] == name) {
-//                    compHeights = compHeights.splice(x, 2);
-//                    break;
-//                }
-//            }
-//            console.log("Appending new service " + name + " to CH, setting: " + hgt);
-//            var newSvc = [name, hgt];
-//            compHeights = compHeights.concat(newSvc);
-//            console.log("new CH: " + compHeights);
-//        }
 
         Image {
             id: sizeImage
@@ -67,11 +45,9 @@ Labs.ApplicationPage {
 
         ListView {
             id: serviceBoxes
-            //anchors.fill: parent
             model: swClient.getServices()
             width:  parent.width
             height: parent.height
-            //clip: true
             interactive: (height < contentHeight)
             spacing: 2
 
@@ -93,12 +69,10 @@ Labs.ApplicationPage {
                 ExpandingBox {
                     id: serviceBox
                     expanded: false
-                    //expandedHeight: 380
                     anchors.left:  parent.left
                     anchors.leftMargin: 2
                     anchors.right:  parent.right
                     anchors.rightMargin: 2
-                    //detailsComponent: undefined
                     height: sizeImage.height // TODO: once ExpandingBox is working properly, go this way
                     //height: (sizeImage.height ? sizeImage.height : 75)
 		    property bool first: true
@@ -215,23 +189,9 @@ Labs.ApplicationPage {
                             loggedInName.text = swServiceConfig.getParamValue(Const.nameParam);
                         }
                     }
-//                      onChanged: {
-//                          console.log("Expanded changed for " + modelData + ": " + expanded);
-//                          var idx;
-//                          for (idx in contentArea.compHeights) {
-//                              if (contentArea.compHeights[idx] == modelData) {
-//                                  //Force it to be a number...
-//                                  var idx1 = (idx * 1) + 1;
-//                                  console.log("Found it onChanged: setting expHeight to " + contentArea.compHeights[idx1] + " for svc " + modelData);
-//                                  expandedHeight = contentArea.compHeights[idx1] + serviceBox.expandButton.height + 20;
-
-//                                  break;
-//                              }
-//                          }
-//                      }
                     Component.onCompleted: {
                         var authType = swServiceConfig.authType;
-                        console.log("Auth type: " + authType);
+                        console.debug("Auth type: " + authType);
                         switch (authType) {
                         case SwClientServiceConfig.AuthTypeUsername:
                         case SwClientServiceConfig.AuthTypePassword:
@@ -264,8 +224,6 @@ Labs.ApplicationPage {
 
                     Item {
                         id: upItem
-                        //anchors.fill: parent
-//                        color: "#d5d5d5"
                         width: parent.width
                         height: childrenRect.height + 30
 
@@ -848,13 +806,7 @@ Labs.ApplicationPage {
             title: Const.dialogTitleText
             width: container.width - 80
             height: container.height - 80
-//            dialogWidth: container.width - 80
-//            dialogHeight: container.height - 80
             z: 500
-
-//            onAccepted: {
-//                dialogLoader.sourceComponent = undefined;
-//            }
 
             content: Flickable {
                 id: flickable
