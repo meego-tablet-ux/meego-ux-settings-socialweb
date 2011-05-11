@@ -28,3 +28,4 @@ Icon=web
 
 [MTS]
 Part=/usr/share/meego-ux-settings/Socialweb/Socialweb.qml
+Translation=meego-ux-settings-socialweb
