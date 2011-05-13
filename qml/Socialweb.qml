@@ -26,6 +26,10 @@ AppPage {
             catalog: "meego-ux-settings-socialweb"
     }
 
+    Theme {
+        id: theme
+    }
+
     Component.onCompleted: {
         console.debug("Services: " + swClient.getServices());
     }
@@ -137,8 +141,8 @@ AppPage {
                             anchors.leftMargin: 10
                             text: swService.getDisplayName()
                             elide: Text.ElideRight
-                            font.pixelSize: theme_fontPixelSizeLarge
-                            color: theme_fontColorNormal
+                            font.pixelSize: theme.fontPixelSizeLarge
+                            color: theme.fontColorNormal
                         }
 
                         Text {
@@ -149,8 +153,8 @@ AppPage {
                             anchors.leftMargin: 10
                             text: swServiceConfig.getParamValue(Const.nameParam)
                             elide: Text.ElideRight
-                            font.pixelSize: theme_fontPixelSizeNormal
-                            color: theme_fontColorNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
+                            color: theme.fontColorNormal
                             visible: (swService.creds == SwClientService.CredsValid &&
                                       serviceBox.expanded == false)
                         }
@@ -259,9 +263,9 @@ AppPage {
                             anchors.top: upItem.top
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             onLinkActivated: Qt.openUrlExternally(link);
                             text: swServiceConfig.getDescription() +
                                 Const.linkText.arg(swServiceConfig.getLink())
@@ -274,9 +278,9 @@ AppPage {
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             visible: swService.configured
 
                             Component.onCompleted: {
@@ -400,9 +404,9 @@ AppPage {
                             anchors.top: flickrItem.top
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             onLinkActivated: Qt.openUrlExternally(link);
                         }
 
@@ -412,9 +416,9 @@ AppPage {
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             visible: text
                         }
 
@@ -538,9 +542,9 @@ AppPage {
                             anchors.top: facebookItem.top
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             onLinkActivated: Qt.openUrlExternally(link);
                         }
 
@@ -550,9 +554,9 @@ AppPage {
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             visible: text
                         }
 
@@ -682,9 +686,9 @@ AppPage {
                             anchors.top: oauthItem.top
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             onLinkActivated: Qt.openUrlExternally(link);
                         }
 
@@ -694,9 +698,9 @@ AppPage {
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme_fontColorNormal
+                            color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme_fontPixelSizeNormal
+                            font.pixelSize: theme.fontPixelSizeNormal
                             visible: text
                         }
 
