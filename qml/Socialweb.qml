@@ -37,7 +37,6 @@ AppPage {
 
     Item {
         id: contentArea
-        parent: container.content
         anchors.fill: parent
 
         Image {
@@ -79,12 +78,12 @@ AppPage {
                     anchors.rightMargin: 2
                     height: sizeImage.height // TODO: once ExpandingBox is working properly, go this way
                     //height: (sizeImage.height ? sizeImage.height : 75)
-		    property bool first: true
+                    property bool first: true
                     onHeightChanged: {
-		        if (first) {
-			    buttonHeight = height;
-			    first = false;
-			}
+                        if (first) {
+                            buttonHeight = height;
+                            first = false;
+                        }
                     }
 
                     Image {
@@ -241,16 +240,19 @@ AppPage {
                             switch (creds) {
                             case SwClientService.CredsUnknown:
                                 textStatus.text = Const.signingInText;
+                                textStatus.show();
                                 break;
                             case SwClientService.CredsInvalid:
                                 {
                                 textStatus.text = Const.cantSignInText;
+                                textStatus.show();
                                 btnApply.text = Const.signInText;
                                 }
                                 break;
                             case SwClientService.CredsValid:
                                 {
                                 textStatus.text = Const.signedInText;
+                                textStatus.show();
                                 btnApply.text = Const.signOutText;
                                 }
                                 break;
@@ -272,15 +274,12 @@ AppPage {
                                 .arg(Const.moreDetailsText);
                         }
 
-                        Text {
+                        InfoBar {
                             id: textStatus
                             width: parent.width
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme.fontColorNormal
-                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme.fontPixelSizeNormal
                             visible: swService.configured
 
                             Component.onCompleted: {
@@ -410,16 +409,12 @@ AppPage {
                             onLinkActivated: Qt.openUrlExternally(link);
                         }
 
-                        Text {
+                        InfoBar {
                             id: textStatus
                             width: parent.width
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme.fontColorNormal
-                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme.fontPixelSizeNormal
-                            visible: text
                         }
 
                         Connections {
@@ -458,10 +453,12 @@ AppPage {
                                         btnApply.text = Const.continueText
                                     } else {
                                         textStatus.text = Const.cantSignInText;
+                                        textStatus.show();
                                     }
                                 } else if (text == Const.continueText) {
                                     if (!swServiceConfig.flickrContinueLogin()) {
                                         textStatus.text = Const.cantSignInText;
+                                        textStatus.show();
                                         btnApply.text = Const.signInText;
                                     }
                                     else {
@@ -548,16 +545,12 @@ AppPage {
                             onLinkActivated: Qt.openUrlExternally(link);
                         }
 
-                        Text {
+                        InfoBar {
                             id: textStatus
                             width: parent.width
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme.fontColorNormal
-                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme.fontPixelSizeNormal
-                            visible: text
                         }
 
                         Button {
@@ -588,6 +581,7 @@ AppPage {
                                         webAuthDialog.testurl = "http://www.facebook.com/connect/login_success.html";
                                     } else {
                                         textStatus.text = Const.cantSignInText;
+                                        textStatus.show();
                                     }
                                 } else {
                                     swServiceConfig.facebookDeleteLogin();
@@ -692,16 +686,12 @@ AppPage {
                             onLinkActivated: Qt.openUrlExternally(link);
                         }
 
-                        Text {
+                        InfoBar {
                             id: textStatus
                             width: parent.width
                             anchors.top: textDescription.bottom
                             anchors.topMargin: 12
                             anchors.left: parent.left
-                            color: theme.fontColorNormal
-                            wrapMode: Text.WrapAtWordBoundaryOrAnywhere
-                            font.pixelSize: theme.fontPixelSizeNormal
-                            visible: text
                         }
 
                         TextEntry {
@@ -747,6 +737,7 @@ AppPage {
                                     }
                                     else {
                                         textStatus.text = Const.cantSignInText;
+                                        textStatus.show();
                                     }
                                 } else if (text == Const.continueText) {
                                     if (edtVerifier.visible) {
@@ -754,6 +745,7 @@ AppPage {
                                     }
                                     if (!swServiceConfig.oauthContinueLogin()) {
                                         textStatus.text = Const.cantSignInText;
+                                        textStatus.show();
                                         btnApply.text = Const.signInText;
                                     }
                                     else {
