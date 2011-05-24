@@ -225,10 +225,10 @@ AppPage {
                 Component {
                     id: upService
 
-                    Item {
+                    Column {
                         id: upItem
                         width: parent.width
-                        height: childrenRect.height + 30
+                        spacing: 12
 
                         Component.onCompleted: {
                             credsChanged();
@@ -262,9 +262,6 @@ AppPage {
                         Text {
                             id: textDescription
                             width: parent.width
-                            anchors.top: upItem.top
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
                             color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: theme.fontPixelSizeNormal
@@ -277,15 +274,23 @@ AppPage {
                         InfoBar {
                             id: textStatus
                             width: parent.width
-                            anchors.top: textDescription.bottom
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
                             visible: swService.configured
 
                             Component.onCompleted: {
                                 credsChanged();
                             }
 
+                        }
+
+                        InfoBar {
+                            id: sharingService
+                            width: parent.width
+                            text: Const.sharingOnlyText;
+
+                            Component.onCompleted: {
+                                if (!swService.hasOpenView())
+                                    sharingService.show();
+                            }
                         }
 
                         Connections {
@@ -300,24 +305,16 @@ AppPage {
 
                         TextEntry {
                             id: edtUName
-                            anchors.top: (textStatus.visible ? textStatus.bottom : textDescription.bottom)
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
-                            anchors.right: parent.right
                             defaultText: Const.usernameDefaultText
-                            width: parent.width / 2
+                            width: parent.width
                             text: swServiceConfig.getParamValue(Const.nameParam)
                             textInput.inputMethodHints: Qt.ImhNoAutoUppercase
                         }
 
                         TextEntry {
                             id: edtPassword
-                            anchors.top: edtUName.bottom
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
-                            anchors.right: parent.right
                             defaultText: Const.passwordDefaultText
-                            width: parent.width / 2
+                            width: parent.width
                             text: swServiceConfig.getParamValue(Const.passwordParam)
                             textInput.echoMode: TextInput.Password
                             visible: (swServiceConfig.authType == SwClientServiceConfig.AuthTypePassword)
@@ -326,9 +323,7 @@ AppPage {
 
                         Button {
                             id: btnApply
-                            anchors.top: (edtPassword.visible ? edtPassword.bottom : edtUName.bottom)
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
+                            anchors.horizontalCenter: parent.horizontalCenter
                             height: Const.buttonHeight
                             width: Const.buttonWidth
                             text: Const.signInText
@@ -349,17 +344,15 @@ AppPage {
                                 }
                             }
                         }
-
                     }
                 }
 
                 Component {
                     id: flickrService
-                    Item {
+                    Column {
                         id: flickrItem
-                        //anchors.fill: parent
                         width: parent.width
-                        height: childrenRect.height + 30
+                        spacing: 12
 
                         Component.onCompleted: {
                             credsChanged();
@@ -400,9 +393,6 @@ AppPage {
                         Text {
                             id: textDescription
                             width: parent.width
-                            anchors.top: flickrItem.top
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
                             color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: theme.fontPixelSizeNormal
@@ -412,9 +402,17 @@ AppPage {
                         InfoBar {
                             id: textStatus
                             width: parent.width
-                            anchors.top: textDescription.bottom
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
+                        }
+
+                        InfoBar {
+                            id: sharingService
+                            width: parent.width
+                            text: Const.sharingOnlyText;
+
+                            Component.onCompleted: {
+                                if (!swService.hasOpenView())
+                                    sharingService.show();
+                            }
                         }
 
                         Connections {
@@ -427,8 +425,6 @@ AppPage {
                         Button {
                             id: btnApply
                             property bool inClick: false
-                            anchors.top: (textStatus.visible ? textStatus.bottom : textDescription.bottom)
-                            anchors.topMargin: 20
                             anchors.horizontalCenter: parent.horizontalCenter
                             height: Const.buttonHeight
                             width: Const.buttonWidth
@@ -492,9 +488,9 @@ AppPage {
 
                 Component {
                     id: facebookService
-                    Item {
+                    Column {
                         id: facebookItem
-                        height: childrenRect.height + 30
+                        spacing: 12
                         width: parent.width
 
                         Component.onCompleted: {
@@ -536,9 +532,6 @@ AppPage {
                         Text {
                             id: textDescription
                             width: parent.width
-                            anchors.top: facebookItem.top
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
                             color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: theme.fontPixelSizeNormal
@@ -548,16 +541,22 @@ AppPage {
                         InfoBar {
                             id: textStatus
                             width: parent.width
-                            anchors.top: textDescription.bottom
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
+                        }
+
+                        InfoBar {
+                            id: sharingService
+                            width: parent.width
+                            text: Const.sharingOnlyText;
+
+                            Component.onCompleted: {
+                                if (!swService.hasOpenView())
+                                    sharingService.show();
+                            }
                         }
 
                         Button {
                             id: btnApply
                             property bool inClick: false
-                            anchors.top: (textStatus.visible ? textStatus.bottom : textDescription.bottom)
-                            anchors.topMargin: 20
                             anchors.horizontalCenter: parent.horizontalCenter
                             height: Const.buttonHeight
                             width: Const.buttonWidth
@@ -633,9 +632,9 @@ AppPage {
 
                 Component {
                     id: oauthService
-                    Item {
+                    Column {
                         id: oauthItem
-                        height: childrenRect.height + 30
+                        spacing: 12
                         width: parent.width
 
                         Component.onCompleted: {
@@ -677,9 +676,6 @@ AppPage {
                         Text {
                             id: textDescription
                             width: parent.width
-                            anchors.top: oauthItem.top
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
                             color: theme.fontColorNormal
                             wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                             font.pixelSize: theme.fontPixelSizeNormal
@@ -689,18 +685,23 @@ AppPage {
                         InfoBar {
                             id: textStatus
                             width: parent.width
-                            anchors.top: textDescription.bottom
-                            anchors.topMargin: 12
-                            anchors.left: parent.left
+                        }
+
+                        InfoBar {
+                            id: sharingService
+                            width: parent.width
+                            text: Const.sharingOnlyText;
+
+                            Component.onCompleted: {
+                                if (!swService.hasOpenView())
+                                    sharingService.show();
+                            }
                         }
 
                         TextEntry {
                             id: edtVerifier
-                            anchors.top: textStatus.visible ? textStatus.bottom : textDescription.bottom
-                            anchors.left: parent.left
-                            anchors.margins: 10
                             defaultText: Const.verifierDefaultText
-                            width: parent.width / 2
+                            width: parent.width
                             visible: swServiceConfig.oauthNeedsVerifier();
                             textInput.inputMethodHints: Qt.ImhNoAutoUppercase
                         }
@@ -708,9 +709,6 @@ AppPage {
                         Button {
                             id: btnApply
                             property bool inClick: false
-                            anchors.top: (edtVerifier.visible ? edtVerifier.bottom :
-                                          textStatus.visible ? textStatus.bottom : textDescription.bottom)
-                            anchors.topMargin: 20
                             anchors.horizontalCenter: parent.horizontalCenter
                             height: Const.buttonHeight
                             width: Const.buttonWidth
