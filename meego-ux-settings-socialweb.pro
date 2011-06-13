@@ -1,4 +1,4 @@
-VERSION=0.3.1
+VERSION=0.3.2
 BASEDIR=/usr/share/meego-ux-settings/
 QMLDIR=$$BASEDIR/Socialweb/
 TEMPLATE = subdirs
