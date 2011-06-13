@@ -76,16 +76,17 @@ AppPage {
                     anchors.leftMargin: 2
                     anchors.right:  parent.right
                     anchors.rightMargin: 2
-                    height: sizeImage.height // TODO: once ExpandingBox is working properly, go this way
+                    height: buttonHeight
+                    buttonHeight: sizeImage.height // TODO: once ExpandingBox is working properly, go this way
                     //height: (sizeImage.height ? sizeImage.height : 75)
-                    property bool first: true
-                    onHeightChanged: {
+//                    property bool first: true
+/*                    onHeightChanged: {
                         if (first) {
                             buttonHeight = height;
                             first = false;
                         }
                     }
-
+*/
                     Image {
                         id: serviceIcon
                         anchors.top: parent.top
