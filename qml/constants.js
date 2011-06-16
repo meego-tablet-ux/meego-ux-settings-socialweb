@@ -21,6 +21,7 @@ var cantSignInText = qsTr("Unable to sign in, try again later");
 var signingInText = qsTr("Attempting to sign in...");
 var signedInText = qsTr("Successfully signed in!");
 var signedOutText = qsTr("You have successfully signed out.  Content from this service will no longer appear on this device");
+//: Denotes a social networking service that only plugs in to the sharing framework for media sharing, and doesn't provide content on the Friends panel
 var sharingOnlyText = qsTr("This service supports sharing only");
 
 var iconPath = "image://themedimage/icons/services/";
