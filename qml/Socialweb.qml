@@ -78,7 +78,7 @@ AppPage {
                     anchors.rightMargin: 2
                     height: buttonHeight
                     //FIXME: Once ExpandingBox is behaving correctly, and we can bind the value of buttonHeight
-                    buttonHeight: sizeImage.height ? sizeImage.height : 75
+                    buttonHeight: 75 //sizeImage.height ? sizeImage.height : 75
                     Image {
                         id: serviceIcon
                         anchors.top: parent.top
